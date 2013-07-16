@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 import org.junit.Test;
 
 import RollingState.FirstRoll;
-import RollingState.FirstRollAfter2Strike;
 import RollingState.FirstRollAfterStrike;
 import RollingState.RollingState;
 import RollingState.SecondRoll;
@@ -63,13 +62,13 @@ public class TestingRollState {
 	
 	@Test
 	public void scoreWillBeDoubledForTheFirstRollAfterStrike(){
-		RollingState rollState = new FirstRollAfterStrike();
+		RollingState rollState = new FirstRollAfterStrike(2);
 		assertEquals(2, rollState.scoreOfRoll(1));
 	}
 	
 	@Test
 	public void afterFirstRollAfterStrikeIsTheStateOfSecondRollAfterStrike(){
-		RollingState rollState = new FirstRollAfterStrike();
+		RollingState rollState = new FirstRollAfterStrike(2);
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(1);
 		assertTrue(rollState instanceof SecondRoll);
 	}
@@ -97,29 +96,29 @@ public class TestingRollState {
 	
 	@Test
 	public void stateChangeToFirstRollAfter2Strike(){
-		RollingState rollState = new FirstRollAfterStrike();
+		RollingState rollState = new FirstRollAfterStrike(2);
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(10);
-		assertTrue(rollState instanceof FirstRollAfter2Strike);
+		assertTrue(rollState instanceof FirstRollAfterStrike);
 	}
 	
 	@Test
 	public void FirstRollAfter2StrikeGetScoreTrippled(){
-		RollingState rollState = new FirstRollAfter2Strike();
+		RollingState rollState = new FirstRollAfterStrike(3);
 		assertEquals(3, rollState.scoreOfRoll(1));
 	}
 	
 	@Test
 	public void nextStateWillBeTheSecondRollAfterStrikeIfTheFirstRollAfter2StrikesIsANormalRoll(){
-		RollingState rollState = new FirstRollAfter2Strike();
+		RollingState rollState = new FirstRollAfterStrike(3);
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(1);
 		assertTrue(rollState instanceof SecondRoll);
 	}
 	
 	@Test
 	public void stateChangeToFirstRollAfter2StrikeIfTheRollAfter2StrkeIsAlsoAStrike(){
-		RollingState rollState = new FirstRollAfter2Strike();
+		RollingState rollState = new FirstRollAfterStrike(3);
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(10);
-		assertTrue(rollState instanceof FirstRollAfter2Strike);
+		assertTrue(rollState instanceof FirstRollAfterStrike);
 	}
 	
 	@Test
