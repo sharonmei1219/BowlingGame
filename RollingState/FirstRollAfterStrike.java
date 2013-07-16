@@ -1,24 +1,8 @@
 package RollingState;
 
-public class FirstRollAfterStrike implements RollingState {
+public class FirstRollAfterStrike extends FirstRoll {
 
-	protected int scoreFactor;
-	
-	public FirstRollAfterStrike(int scoreFactor){
-		this.scoreFactor = scoreFactor;
+	public FirstRollAfterStrike(int scoreFactor, int carringScoreFactor){
+		super(scoreFactor, carringScoreFactor);
 	}
-	
-	@Override
-	public int scoreOfRoll(int numberOfFallenBottles) {
-		return scoreFactor * numberOfFallenBottles;
-	}
-
-	@Override
-	public RollingState nextStateWhenNumberOfFallenBottlesIs(
-			int numberOfFallenBottles) {
-		if (numberOfFallenBottles == 10)
-			return new FirstRollAfterStrike(3);
-		return new SecondRoll(numberOfFallenBottles, 2);
-	}
-
 }
