@@ -4,19 +4,18 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import RollingState.FirstRoll;
+import RollingState.FirstRollNormal;
 import RollingState.FirstRollAfter2Strike;
 import RollingState.FirstRollAfterStrike;
 import RollingState.FirstRollAfterSpare;
 import RollingState.RollingState;
 import RollingState.SecondRoll;
-import RollingState.SecondRollAfterStrike;
 
 public class TestingRollState {
 
 	@Test
 	public void scoreOfFirstRollIsTheNumberOfFallenBottlesInTheRoll() {
-		RollingState rollState = new FirstRoll();
+		RollingState rollState = new FirstRollNormal();
 		int score = rollState.scoreOfRoll(1);
 		assertEquals(1, score);
 	}
@@ -30,35 +29,35 @@ public class TestingRollState {
 	
 	@Test
 	public void scoreOfSecondRollIsTheNumberOfFallenBottlesInThisRoll(){
-		RollingState rollState = new SecondRoll(1);
+		RollingState rollState = new SecondRoll(1, 1);
 		int score = rollState.scoreOfRoll(1);
 		assertEquals(1, score);
 	}
 	
 	@Test
 	public void stateIsSecondRollAfterFirstRollInWhichTheNumberOfFallenBottlesIsLessThan10(){
-		RollingState rollState = new FirstRoll();
+		RollingState rollState = new FirstRollNormal();
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(1);
 		assertTrue(rollState instanceof SecondRoll);
 	}
 	
 	@Test
 	public void stateIsFirstRollIfTheNumberOfBottlesFallInSecondRollEnoughToMakeTheScoreComeTo10InAFrame(){
-		RollingState rollState = new SecondRoll(1);
+		RollingState rollState = new SecondRoll(1, 1);
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(1);
-		assertTrue(rollState instanceof FirstRoll);
+		assertTrue(rollState instanceof FirstRollNormal);
 	}
 	
 	@Test
 	public void stateIsFirstRollAfterSpareWhenTheNumberOfBottlesFallInSecondRollMakeTheBottlesFallInAFrameComeTo10(){
-		RollingState rollState = new SecondRoll(1);
+		RollingState rollState = new SecondRoll(1, 1);
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(9);
 		assertTrue(rollState instanceof FirstRollAfterSpare);
 	}
 	
 	@Test
 	public  void stateIsFirstRollAfterStrikeWhenFirstRollMakes10BottleFall(){
-		RollingState rollState = new FirstRoll();
+		RollingState rollState = new FirstRollNormal();
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(10);
 		assertTrue(rollState instanceof FirstRollAfterStrike);
 	}
@@ -73,25 +72,25 @@ public class TestingRollState {
 	public void afterFirstRollAfterStrikeIsTheStateOfSecondRollAfterStrike(){
 		RollingState rollState = new FirstRollAfterStrike();
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(1);
-		assertTrue(rollState instanceof SecondRollAfterStrike);
+		assertTrue(rollState instanceof SecondRoll);
 	}
 	
 	@Test
 	public void scoreWillBeDoubledInSecondRollAfterStrike(){
-		RollingState rollState = new SecondRollAfterStrike(1);
+		RollingState rollState = new SecondRoll(1, 2);
 		assertEquals(2, rollState.scoreOfRoll(1));
 	}
 	
 	@Test
 	public void stateChangeToFirstRollAfterTheStateOfSecondRollAfterAStrike(){
-		RollingState rollState = new SecondRollAfterStrike(1);
+		RollingState rollState = new SecondRoll(1, 2);
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(1);
-		assertTrue(rollState instanceof FirstRoll);
+		assertTrue(rollState instanceof FirstRollNormal);
 	}
 	
 	@Test
 	public void secondRollAfterStrikeMakesAFrameSpareThenTheNextStateShouldBeFirstRollAfterSpare(){
-		RollingState rollState = new SecondRollAfterStrike(5);
+		RollingState rollState = new SecondRoll(5, 2);
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(5);
 		assertTrue(rollState instanceof FirstRollAfterSpare);
 		
@@ -114,7 +113,7 @@ public class TestingRollState {
 	public void nextStateWillBeTheSecondRollAfterStrikeIfTheFirstRollAfter2StrikesIsANormalRoll(){
 		RollingState rollState = new FirstRollAfter2Strike();
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(1);
-		assertTrue(rollState instanceof SecondRollAfterStrike);
+		assertTrue(rollState instanceof SecondRoll);
 	}
 	
 	@Test
@@ -122,5 +121,19 @@ public class TestingRollState {
 		RollingState rollState = new FirstRollAfter2Strike();
 		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(10);
 		assertTrue(rollState instanceof FirstRollAfter2Strike);
+	}
+	
+	@Test
+	public void stateChangeToSecondRollIfFirstRollAfterSpareIsANormalRoll(){
+		RollingState rollState = new FirstRollAfterSpare();
+		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(1);
+		assertTrue(rollState instanceof SecondRoll);
+	}
+	
+	@Test
+	public void stateChangeToFirstRollAfterStrikeWhenRollsAStrikeInFirstRollAfterSpare(){
+		RollingState rollState = new FirstRollAfterSpare();
+		rollState = rollState.nextStateWhenNumberOfFallenBottlesIs(10);
+		assertTrue(rollState instanceof FirstRollAfterStrike);
 	}
 }

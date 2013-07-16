@@ -10,7 +10,9 @@ public class FirstRollAfterSpare implements RollingState {
 
 	@Override
 	public RollingState nextStateWhenNumberOfFallenBottlesIs(int numberOfFallenBottles) {
-		return null;
+		if(numberOfFallenBottles == 10)
+			return new FirstRollAfterStrike();
+		return new SecondRoll(numberOfFallenBottles, 1);
 	}
 
 }

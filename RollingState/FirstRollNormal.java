@@ -2,7 +2,7 @@ package RollingState;
 
 
 
-public class FirstRoll implements RollingState {
+public class FirstRollNormal implements RollingState {
 
 	@Override
 	public int scoreOfRoll(int numberOfFallenBottles) {
@@ -13,7 +13,7 @@ public class FirstRoll implements RollingState {
 	public RollingState nextStateWhenNumberOfFallenBottlesIs(int numberOfFallenBottles) {
 		if(numberOfFallenBottles == 10)
 			return new FirstRollAfterStrike();
-		return new SecondRoll(numberOfFallenBottles);
+		return new SecondRoll(numberOfFallenBottles, 1);
 	}
 
 }

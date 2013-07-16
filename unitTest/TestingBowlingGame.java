@@ -28,6 +28,26 @@ public class TestingBowlingGame {
 		assertEquals(12, bowlingScorer.score());
 	}
 	
+	
+	@Test
+	public void secondRollAfterSpareGetANormalScore(){
+		bowlingScorer = bowlingScorer.countRollOf(5)
+				                     .countRollOf(5)
+				                     .countRollOf(1)
+				                     .countRollOf(1);
+		assertEquals(13, bowlingScorer.score());
+	}
+	
+	@Test
+	public void scoreDoubledForTheComing2RollsAfterAStrikeInFirstRollAfterSpare(){
+		bowlingScorer = bowlingScorer.countRollOf(5)
+				                     .countRollOf(5)
+				                     .countRollOf(10)
+				                     .countRollOf(1)
+				                     .countRollOf(1);
+		assertEquals(34, bowlingScorer.score());
+	}
+	
 	@Test
 	public void scoreOfTheRollAfterStrikeWillBeDoubled(){
 		bowlingScorer = bowlingScorer.countRollOf(10)
