@@ -19,8 +19,8 @@ public class SecondRoll implements RollingState {
 	public RollingState nextStateWhenNumberOfFallenBottlesIs(
 			int numberOfFallenBottles) {
 		if (numberOfFallenBottlesInFirstRoll + numberOfFallenBottles == 10)
-			return new FirstRollAfterSpare();
-		return new FirstRollNormal();
+			return new FirstRoll(2);
+		return new FirstRoll(1);
 	}
 
 }

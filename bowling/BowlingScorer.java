@@ -1,12 +1,12 @@
 package bowling;
 
-import RollingState.FirstRollNormal;
+import RollingState.FirstRoll;
 import RollingState.RollingState;
 
 public class BowlingScorer {
 
 	private int _score = 0;
-	private RollingState rollState = new FirstRollNormal();
+	private RollingState rollState = new FirstRoll(1);
 
 	public int score() {
 		return _score;
