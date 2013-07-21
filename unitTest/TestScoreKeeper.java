@@ -12,7 +12,7 @@ public class TestScoreKeeper {
 	@Test
 	public void scoreForANormalRollIsTheBonusPlus1TimesOfBottleCountInTheRoll() {
 		ScoreKeeper scoreKeeper = new ScoreKeeper();
-		scoreKeeper.bonus = Bonus.spareBonus();
+		scoreKeeper.bonus = new Bonus(new int[]{1, 0});
 		scoreKeeper.scoreInNormalRoll(1);
 		assertEquals(2, scoreKeeper.totalScore);
 	}
@@ -20,7 +20,7 @@ public class TestScoreKeeper {
 	@Test
 	public void scoreForABonusRollIsTheBonusTimesOfBottleCountInTheRoll(){
 		ScoreKeeper scoreKeeper = new ScoreKeeper();
-		scoreKeeper.bonus = Bonus.spareBonus();
+		scoreKeeper.bonus = new Bonus(new int[]{1, 0});
 		scoreKeeper.scoreInBonusRoll(1);
 		assertEquals(1, scoreKeeper.totalScore);
 	}

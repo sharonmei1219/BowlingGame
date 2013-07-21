@@ -112,30 +112,51 @@ public class TesBowlingGame {
 	}
 	
 	@Test
-	public void highestScoreOfGame(){
-		roller = scoreOf0(roller, 9);
+	public void last2BonusRollWillCountInScoreIfTheLastRollIsStrike(){
+		roller = new FirstRollInFrame(9);
 		roller = roller.roll(10, scoreKeeper)
-				                     .roll(1, scoreKeeper)
-				                     .roll(1, scoreKeeper);
+				       .roll(1, scoreKeeper)
+				       .roll(1, scoreKeeper);
 		
 		assertEquals(12, scoreKeeper.totalScore);
 	}
 	
 	@Test
 	public void WhenLastFrameIsSpareOnlyCountTheFirstRollAfterTheFinalFrame(){
-		roller = scoreOf0(roller, 9);
+		roller = new FirstRollInFrame(9);
 		roller = roller.roll(5, scoreKeeper)
-				                     .roll(5, scoreKeeper)
-				                     .roll(1, scoreKeeper)
-				                     .roll(1, scoreKeeper);
+				       .roll(5, scoreKeeper)
+				       .roll(1, scoreKeeper)
+				       .roll(1, scoreKeeper);
 		assertEquals(11, scoreKeeper.totalScore);
 	}
 	
-	
-	private Roll scoreOf0(Roll roller, int numberOfFame){
-		for(int i = 0; i < 2* numberOfFame; i ++)
-			roller = roller.roll(0, scoreKeeper);
-			
-		return roller;
+	@Test
+	public void TheRollBeforeWillGetDoubleScoreAndTheLastRollWillGet1TimeScoreWhenLast2FramesAreStrike(){
+		Roll roller = new FirstRollInFrame(8);
+		roller = roller.roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(1, scoreKeeper)
+				       .roll(1, scoreKeeper);
+		assertEquals(33, scoreKeeper.totalScore);
 	}
+	
+	@Test
+	public void HighestScoreIs300(){
+		roller = new FirstRollInFrame(0);
+		roller = roller.roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper)
+				       .roll(10, scoreKeeper);
+		assertEquals(300, scoreKeeper.totalScore);
+	}
+	
 }

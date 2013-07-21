@@ -1,7 +1,6 @@
 package roll;
-
 import scoreKeeper.ScoreKeeper;
 
 public interface Roll {
-	Roll roll(int numberOfFallenBottles, ScoreKeeper scoreKeeper);
+	Roll roll(int bottleCount, ScoreKeeper scoreKeeper);
 }

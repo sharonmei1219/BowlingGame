@@ -1,5 +1,4 @@
 package roll;
-
 import scoreKeeper.ScoreKeeper;
 
 public class BonusRoll implements Roll {

@@ -28,7 +28,7 @@ public class Bonus {
 				                    bonus[1] + addBonus.bonus[1]});
 	}
 	
-	private Bonus(int [] bonus){
+	public Bonus(int [] bonus){
 		this.bonus = bonus.clone();
 	}
 }

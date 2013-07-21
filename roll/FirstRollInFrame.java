@@ -21,6 +21,7 @@ public class FirstRollInFrame implements Roll {
 		return new SecondRollInFrame(bottleCount, frameCount);
 	}
 	
+	
 	static public Roll nextRoll(int frameCount){
 		if (frameCount + 1 == 10)
 			return new BonusRoll();
