@@ -79,58 +79,38 @@ public class TesBowlingGame {
 	@Test
 	public void if2rollsAfterStrikMakesASpareThenTheScoreOfNextRollWillBeDoubled(){
 		roller = roller.roll(10, scoreKeeper)
-<<<<<<< HEAD
 					   .roll(5, scoreKeeper)
 					   .roll(5, scoreKeeper)
 					   .roll(1, scoreKeeper);
-=======
-									 .roll(5, scoreKeeper)
-									 .roll(5, scoreKeeper)
-									 .roll(1, scoreKeeper);
->>>>>>> eefc88f065b9a7e895a48d17159157192f31b0c6
+
 		assertEquals(32, scoreKeeper.totalScore);
 	}
 	
 	@Test
 	public void scoreOfTheRollAfter2StrikeWillBeTripled(){
 		roller = roller.roll(10, scoreKeeper)
-<<<<<<< HEAD
 					   .roll(10, scoreKeeper)
 					   .roll(1, scoreKeeper);
-=======
-									 .roll(10, scoreKeeper)
-									 .roll(1, scoreKeeper);
->>>>>>> eefc88f065b9a7e895a48d17159157192f31b0c6
+
 		assertEquals(33, scoreKeeper.totalScore);
 	}
 	
 	@Test
 	public void scoreOfThe2ndRollAfter2StikeWillBeDoubled(){
 		roller = roller.roll(10, scoreKeeper)
-<<<<<<< HEAD
 				       .roll(10, scoreKeeper)
 				       .roll(1, scoreKeeper)
 				       .roll(1, scoreKeeper);
-=======
-				                     .roll(10, scoreKeeper)
-				                     .roll(1, scoreKeeper)
-				                     .roll(1, scoreKeeper);
->>>>>>> eefc88f065b9a7e895a48d17159157192f31b0c6
 		assertEquals(35, scoreKeeper.totalScore);
 	}
 	
 	@Test
 	public void scoreOfTheRollAfter3StrikeWillStillBeTripled(){
 		roller = roller.roll(10, scoreKeeper)
-<<<<<<< HEAD
 				       .roll(10, scoreKeeper)
 				       .roll(10, scoreKeeper)
 				       .roll(1, scoreKeeper);
-=======
-				                     .roll(10, scoreKeeper)
-				                     .roll(10, scoreKeeper)
-				                     .roll(1, scoreKeeper);
->>>>>>> eefc88f065b9a7e895a48d17159157192f31b0c6
+
 		assertEquals(63, scoreKeeper.totalScore);
 	}
 	
