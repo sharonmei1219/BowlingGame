@@ -10,6 +10,7 @@ public class FirstRollInFrame implements Roll {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public Roll roll(int pins, ScoreKeeper scoreKeeper) {
 		scoreKeeper.scoreForNormalRoll(pins);
 		
@@ -19,6 +20,17 @@ public class FirstRollInFrame implements Roll {
 		}
 
 		return new SecondRollInFrame(pins, frameCount);
+=======
+	public Roll roll(int bottleCount, ScoreKeeper scoreKeeper) {
+		scoreKeeper.scoreInNormalRoll(bottleCount);
+		
+		if (bottleCount == 10) {
+			scoreKeeper.strike();
+			return nextRoll(frameCount);
+		}
+
+		return new SecondRollInFrame(bottleCount, frameCount);
+>>>>>>> eefc88f065b9a7e895a48d17159157192f31b0c6
 	}
 	
 	

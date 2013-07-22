@@ -1,4 +1,8 @@
 package bonus;
+<<<<<<< HEAD
+=======
+
+>>>>>>> eefc88f065b9a7e895a48d17159157192f31b0c6
 public class Bonus {
 	private int [] bonus;
 
@@ -11,7 +15,10 @@ public class Bonus {
 	}
 	
 	public static Bonus strikeBonus(){
+<<<<<<< HEAD
 	
+=======
+>>>>>>> eefc88f065b9a7e895a48d17159157192f31b0c6
 		return new Bonus(new int[]{1, 1});
 	}
 	
